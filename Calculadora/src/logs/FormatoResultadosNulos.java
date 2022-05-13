@@ -4,12 +4,16 @@ import java.util.logging.Formatter;
 import java.util.logging.Handler;
 import java.util.logging.LogRecord;
 
-public class FormatoHTML extends Formatter {
+public class FormatoResultadosNulos extends Formatter {
 
 	@Override
 	public String format(LogRecord record) {
 		String[] array = record.getMessage().split("\\|");
+
 		//Obtengo la parte "Resultado: XX":
+		
+		
+		
 		return "<tr>\r\n"
 				+ "				<td>" + array[0].split(":")[1] + "</td>\r\n"
 				+ "				<td>" + array[1].split(":")[1] + "</td>\r\n"
@@ -31,12 +35,12 @@ public class FormatoHTML extends Formatter {
 				+ "				<th>Operando 1</th>				\r\n"
 				+ "				<th>Operando 2</th>\r\n"
 				+ "				<th>Resultado</th>\r\n"
-				+ "			</tr>\r\n";
+				+ "			</tr>";
 	}
 	
 	@Override
 	public String getTail(Handler h) {
-		return "		</table>\r\n"
+		return "</table>\r\n"
 				+ "	</body>\r\n"
 				+ "</html>";
 	}

@@ -10,7 +10,9 @@ import java.util.logging.Logger;
 import java.util.logging.XMLFormatter;
 
 import logs.FiltroLogSoloMultiplicar;
+import logs.FiltroResultadosNulos;
 import logs.FormatoHTML;
+import logs.FormatoResultadosNulos;
 import logs.LogConsolaMasFichero;
 import menu.Menu;
 import operaciones.Operaciones;
@@ -28,7 +30,7 @@ public class Calculadora{
 	}
     public static void main(String[] args) { 
     	
-    	//configurarLog();
+    	configurarLog();
     	
         int resultado = 0;
         String operacion = "";
@@ -61,7 +63,9 @@ public class Calculadora{
             	} else {
             		System.out.println ("Operación no válida");
             	}
-            	LOGGER.log(Level.FINE, "Operación: " + operacion + " | operando 1: " + operandos[0] + " | operando 2: " + operandos[1] + " | Resultado: " + resultado);
+            	//LOGGER.log(Level.FINE, "Operación: " + operacion + " | operando 1: " + operandos[0] + " | operando 2: " + operandos[1] + " | Resultado: " + resultado);
+            	String cadenaLog = "Operación: " + operacion + " | operando 1: " + operandos[0] + " | operando 2: " + operandos[1] + " | Resultado: " + resultado;
+            	LOGGER.log(Level.FINE, cadenaLog);
             }catch(ArithmeticException e) {
         	System.out.println("Operaciones aritmeticas no validas "+ e.getMessage());
         	LOGGER.log(Level.WARNING, "Ha ocurrido un ArithmeticException." ,e);
@@ -69,30 +73,30 @@ public class Calculadora{
         }   while (menu.repetir());
         
     }
-    /*
+    
     public static void configurarLog() {
     	
-    	LOGGER.setUseParentHandlers(false);
+    	//LOGGER.setUseParentHandlers(false);
     	
         Handler fileHandler  = null;
-        Handler consoleHandler  = new ConsoleHandler();
+        //Handler consoleHandler  = new ConsoleHandler();
         
-        LOGGER.addHandler(consoleHandler);
+        //LOGGER.addHandler(consoleHandler);
         
         try {
-        	fileHandler  = new FileHandler("./logs/operaciones.log");
+        	fileHandler  = new FileHandler("./logs/resultadosNulos.html");
         }catch (IOException exception){
             LOGGER.log(Level.SEVERE, "Ocurrió un error en FileHandler.", exception);
         }
-        fileHandler.setFormatter(new FormatoHTML());
+        fileHandler.setFormatter(new FormatoResultadosNulos());
         
         LOGGER.addHandler(fileHandler);
         
-        consoleHandler.setLevel(Level.WARNING);
+        //consoleHandler.setLevel(Level.WARNING);
         fileHandler.setLevel(Level.FINE);
         
-        fileHandler.setFilter(new FiltroLogSoloMultiplicar());
-        LOGGER.setLevel(Level.FINE);
+        fileHandler.setFilter(new FiltroResultadosNulos());
+        //LOGGER.setLevel(Level.FINE);
     }
-    */
+    
 }

@@ -8,7 +8,7 @@ public class FiltroLogSoloMultiplicar implements Filter {
 	@Override
 	public boolean isLoggable(LogRecord record) {
 		boolean guardarLog = false;
-		if(record.getMessage() != null && record.getMessage().contains("*")) {
+		if(record !=null && record.getMessage() != null && record.getMessage().contains("*")) {
 			guardarLog = true;
 		}
 		return guardarLog;
